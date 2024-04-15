@@ -1,0 +1,71 @@
+Group_1_blowers = ['5min_CF_D1','5min_CF_D2','5min_CF_D3','5min_CF_D4',
+                   '5min_CF_B9','5min_CF_B10','5min_CF_B11','5min_CF_B12']
+Group_2_blowers = ['5min_CF_D13','5min_CF_D14','5min_CF_D15','5min_CF_D16',
+                   '5min_CF_B5','5min_CF_B6','5min_CF_B7','5min_CF_B8']
+Group_3_blowers = ['5min_CF_D5','5min_CF_D6','5min_CF_D7','5min_CF_D8',
+                   '5min_CF_B13','5min_CF_B14','5min_CF_B15','5min_CF_B16']
+Group_4_blowers = ['5min_CF_D9','5min_CF_D10','5min_CF_D11','5min_CF_D12',
+                   '5min_CF_B1','5min_CF_B2','5min_CF_B3','5min_CF_B4']
+Group_5_blowers = ['5min_CF_C1','5min_CF_C2','5min_CF_C3','5min_CF_C4',
+                   '5min_CF_C5','5min_CF_C6','5min_CF_C7','5min_CF_C8',
+                   '5min_CF_C9','5min_CF_C10','5min_CF_C11','5min_CF_C12',
+                   '5min_CF_C13','5min_CF_C14','5min_CF_C15','5min_CF_C16']
+Group_6_blowers = ['5min_CF_A1','5min_CF_A2','5min_CF_A3','5min_CF_A4',
+                   '5min_CF_A5','5min_CF_A6','5min_CF_A7','5min_CF_A8',
+                   '5min_CF_A9','5min_CF_A10','5min_CF_A11','5min_CF_A12',
+                   '5min_CF_A13','5min_CF_A14','5min_CF_A15','5min_CF_A16']
+comb = ['011111', '101111', '110111', '111011']
+
+Constraints:
+
+1. if soot_values_Brear_Dfront_actual > = soot_values_Brear_Dfront_Lower_Lower,
+Group_1_blowers can have value as zero or it will have current value.
+2. if soot_values_Bright_Dleft_actual > = soot_values_Bright_Dleft_Lower,
+Group_2_blowers can have value as zero or it will have current value.
+3. if soot_values_Bleft_Dright_actual > = soot_values_Bleft_Dright_Lower,
+Group_3_blowers can have value as zero or it will have current value.
+4. if soot_values_Bfront_Drear_actual > = soot_values_Bfront_Drear_Lower,
+Group_4_blowers can have value as zero or it will have current value.
+5. if soot_values_C_all_actual > = soot_values_C_all_Lower,
+Group_5_blowers can have value as zero or it will have current value.
+6. if soot_values_A_all_actual >= soot_values_A_all_Lower,
+Group_6_blowers can have value as zero or it will have current value.
+7. if df['comb'] == comb[0] or df['comb'] == comb[1]:
+df['Top_Mill_load_ratio_5min'] >= 110/df['coal flow']
+df['Top_Mill_load_ratio_5min'] <= 150/df['coal flow']
+
+df['Middle_Mill_load_ratio_5min'] >= 110/df['coal flow']
+df['Middle_Mill_load_ratio_5min'] <= 150/df['coal flow']
+
+df['Bottom_Mill_load_ratio_5min'] >= 50/df['coal flow']
+df['Bottom_Mill_load_ratio_5min'] <= 75/df['coal flow']
+
+8. if df['comb'] == comb[2] or df['comb'] == comb[3]:
+df['Top_Mill_load_ratio_5min'] >= 110/df['coal flow']
+df['Top_Mill_load_ratio_5min'] <= 150/df['coal flow']
+
+df['Middle_Mill_load_ratio_5min'] >= 50/df['coal flow']
+df['Middle_Mill_load_ratio_5min'] <= 75/df['coal flow']
+
+df['Bottom_Mill_load_ratio_5min'] >= 110/df['coal flow']
+df['Bottom_Mill_load_ratio_5min'] <= 150/df['coal flow']
+
+9. df['Left_Side_Damper_5min'] >= 0
+   df['Left_Side_Damper_5min'] <= 100
+
+10.df['Right_Side_Damper_5min'] >= 0
+   df['Right_Side_Damper_5min'] <= 100
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
