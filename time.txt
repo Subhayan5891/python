@@ -1,0 +1,69 @@
+def generate_values_damper(constraints, target_sum):
+    # Step 1: Identify features with narrow ranges and calculate their fixed values
+    fixed_values = {}
+    adjustable_constraints = {}
+    for var, limits in constraints.items():
+        if limits['Upper'] - limits['Lower'] < 5:
+            fixed_values[var] = (limits['Upper'] + limits['Lower']) / 2
+        else:
+            adjustable_constraints[var] = limits
+
+    # Step 2: Adjust the target sum
+    fixed_sum = sum(fixed_values.values())
+    adjusted_target_sum = target_sum - fixed_sum
+
+    # Step 3: Generate values for adjustable features
+    adjustable_features = list(adjustable_constraints.keys())
+    num_adjustable_features = len(adjustable_features)
+    num_rows = 50
+    adjustable_values = np.zeros((num_rows, num_adjustable_features))
+
+    for i in range(num_rows):
+        while True:
+            remaining_sum = adjusted_target_sum
+            for j, var in enumerate(adjustable_features):
+                limits = adjustable_constraints[var]
+                if j == num_adjustable_features - 1:
+                    adjustable_values[i, j] = remaining_sum
+                else:
+                    adjustable_values[i, j] = np.random.uniform(low=limits['Lower'], high=limits['Upper'])
+                    remaining_sum -= adjustable_values[i, j]
+            adjustable_values[i, -1] = np.clip(remaining_sum, adjustable_constraints[adjustable_features[-1]]['Lower'], adjustable_constraints[adjustable_features[-1]]['Upper'])
+
+            total_sum = np.sum(adjustable_values[i, :])
+            if np.isclose(total_sum, adjusted_target_sum, atol=adjusted_target_sum * 0.025):
+                break
+
+    # Step 4: Combine the fixed values with the generated values into a single array
+    result_values = []
+    for i in range(num_rows):
+        row = []
+        for var in list1:
+            if var in adjustable_constraints:
+                row.append(adjustable_values[i, adjustable_features.index(var)])
+            else:
+                row.append(fixed_values[var])
+        result_values.append(row)
+    
+    return np.array(result_values)
+
+def generate_values_mill(constraints, target_sum):
+    num_features = len(constraints)
+    values = np.zeros((50, num_features))
+ 
+    for i in range(50):
+        while True:
+            remaining_sum = target_sum
+            for j, (var, limits) in enumerate(constraints.items()):
+                if j == num_features - 1:
+                    values[i, j] = remaining_sum
+                else:
+                    values[i, j] = np.random.uniform(low=limits['Lower'], high=limits['Upper'])
+                    remaining_sum -= values[i, j]
+            values[i, -1] = np.clip(remaining_sum, constraints[list(constraints.keys())[-1]]['Lower'], constraints[list(constraints.keys())[-1]]['Upper'])
+ 
+            total_sum = np.sum(values[i, :])
+            if np.isclose(total_sum, target_sum, atol=0.01):
+                break
+ 
+    return values
